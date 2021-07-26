@@ -95,6 +95,10 @@ void setup()
   pinMode(LED4_pin, OUTPUT);
   pinMode(TI_LED_pin, OUTPUT);
   
+  // disable interupts while setting up timer and pin change
+  // interupts
+  noInterrupts();
+  
   // TIMER SET UP
   // reset timer 1
   TCCR1A = 0;
@@ -121,6 +125,9 @@ void setup()
   // enable a third and fourth interupt pins
   PCICR |= 0b00000001; // enable PCMSK0 to interupt (pins 8-13)
   PCMSK0 |= 0b00011000;// enable pin 11 and 12 to interupt
+  
+  // enable interupts after set up
+  interrupts();
   
   // EXTERNAL INTERRUPTS
   // set up external interrupts for button and motion sensor input
